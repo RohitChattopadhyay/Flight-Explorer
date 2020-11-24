@@ -220,9 +220,9 @@
                               <th class="text-left h3 w-45 pl-2"><%=flight.getArr()%></th>
                             </tr>
                             <tr>
-                              <td class="text-right pr-2"><%=flight.getTakeOff()%></td>                            
+                              <td class="text-right pr-2"><%=String.format("%04d", flight.getTakeOff())%></td>                            
                               <td class="text-muted text-sm"><small>&mdash; <%=flight.getDuration(0)%> &mdash;</small></td>
-                              <td class="text-left pl-2"><%=flight.getLanding()%></td>
+                              <td class="text-left pl-2"><%=String.format("%04d", flight.getLanding())%></td>
                             </tr>
                           </table>
                         </div>

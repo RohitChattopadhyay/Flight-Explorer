@@ -39,6 +39,10 @@ public class Flight {
          min_diff += 60;
          hr_diff -= 1;
       }
+      else if(min_diff>0){
+         min_diff -= 60;
+         hr_diff += 1;
+      }
       return hr_diff*100+min_diff;
    }
 
@@ -46,6 +50,8 @@ public class Flight {
       int duration = getDuration();
       int duration_min = duration%100;
       int duration_hr = duration/100;
+      if(duration_hr == 0)
+         return duration_min + " min";
       if(duration_min == 0)
          return duration_hr + " hr";
       return duration_hr + "hr "  + duration_min + "min";

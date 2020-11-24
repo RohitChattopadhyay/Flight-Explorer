@@ -100,6 +100,16 @@ public class SearchServlet extends HttpServlet {
       LinkedList<Route> routes = new LinkedList<>();
       LinkedList<Flight> flights = new LinkedList<>();
       this.getRoutes(src, dest, time, 0, "", flights, routes);
+      routes.sort((r1, r2) -> {
+         int res = r1.cost - r2.cost;
+         if (res == 0) {
+            res = r1.flights.size() - r2.flights.size();
+            if (res == 0)
+               return r1.flyingTime - r2.flyingTime;
+            return res;
+         }
+         return res;
+      });
       return routes;
    }
 
