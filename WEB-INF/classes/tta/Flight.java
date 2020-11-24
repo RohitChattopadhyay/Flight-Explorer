@@ -39,7 +39,7 @@ public class Flight {
          min_diff += 60;
          hr_diff -= 1;
       }
-      else if(min_diff>0){
+      else if(min_diff>59){
          min_diff -= 60;
          hr_diff += 1;
       }
