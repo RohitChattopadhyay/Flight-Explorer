@@ -5,10 +5,13 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 // Extend HttpServlet class
 public class SearchServlet extends HttpServlet {
@@ -94,6 +97,16 @@ public class SearchServlet extends HttpServlet {
       }
    }
 
+   private ArrayList<Deals> getActiveDeals() {
+      Calendar now = Calendar.getInstance();
+      int time_now = 100 * now.get(Calendar.HOUR_OF_DAY) + now.get(Calendar.MINUTE);
+      ArrayList<Deals> activeDeals = new ArrayList<Deals>(deals.stream()
+                                    .filter(deal -> deal.getExpiry() > time_now)
+                                    .sorted(Comparator.comparing(Deals::getExpiry))
+                                    .collect(Collectors.toList()));
+      return activeDeals;
+   }
+
    private LinkedList<Route> getRoutes(String src, String dest, int time) {
       src = src.toUpperCase();
       dest = dest.toUpperCase();
@@ -156,7 +169,7 @@ public class SearchServlet extends HttpServlet {
       try {
          HttpSession session = request.getSession();
          request.setAttribute("showResults", false);
-         session.setAttribute("deals", deals);
+         session.setAttribute("deals", getActiveDeals());
          session.setAttribute("airports", airport_flights.keySet());
          request.setCharacterEncoding("UTF-8");
          request.getRequestDispatcher("/WEB-INF/views/search.jsp").forward(request, response);
@@ -185,7 +198,7 @@ public class SearchServlet extends HttpServlet {
          session.setAttribute("destination", destination);
          session.setAttribute("time", request.getParameter("time"));
          request.setAttribute("showResults", true);
-         session.setAttribute("deals", deals);
+         session.setAttribute("deals", getActiveDeals());
          session.setAttribute("airports", airport_flights.keySet());
          request.setAttribute("results", results);
          request.setCharacterEncoding("UTF-8");

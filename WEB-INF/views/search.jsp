@@ -196,8 +196,9 @@
               <p class="display-4 mb-1">
                 Results
               </p>
-              <% if(request.getAttribute("execution_time")!=null){%><p class="mb-0">Search took <%=((Long)request.getAttribute("execution_time")/10000000.0)%>ms </p><%}%>
-              <% if(search_results.size()==0){%><p class="lead">No Flights Found</p><%}%>
+              <% if(session.getAttribute("destination").equals(session.getAttribute("source"))){%><p class="lead">Please enter different Departure and Arrival airport</p><%}%>
+              <% else { if(request.getAttribute("execution_time")!=null){%><p class="mb-0">Search took <%=((Long)request.getAttribute("execution_time")/10000000.0)%>ms </p><%}%>              
+              <% if(search_results.size()==0){%><p class="lead">No Flights Found</p><%}}%>
             </div>
           <%
           for( Route route : search_results ){%>
