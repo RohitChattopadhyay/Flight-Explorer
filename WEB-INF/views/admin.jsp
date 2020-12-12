@@ -15,10 +15,10 @@
     <meta name="author" content="Rohit Chattopadhyay | 73" />
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/simplex/bootstrap.min.css"
     />
   </head>
-  <body class="bg-light pt-5">
+  <body class="pt-5">
     <div class="container pt-5 mt-5">
         <p class="display-4 text-center">Deals Management</p>
         <div class="col-6 offset-3 bg-white shadow border rounded">
